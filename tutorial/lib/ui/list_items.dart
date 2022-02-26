@@ -35,6 +35,8 @@ import '../app_state.dart';
 import '../router/ui_pages.dart';
 
 class ListItems extends StatelessWidget {
+  const ListItems({Key key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     final appState = Provider.of<AppState>(context, listen: false);

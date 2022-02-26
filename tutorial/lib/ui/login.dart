@@ -35,6 +35,8 @@ import '../app_state.dart';
 import '../router/ui_pages.dart';
 
 class Login extends StatefulWidget {
+  const Login({Key key}) : super(key: key);
+
   @override
   _LoginState createState() => _LoginState();
 }
@@ -93,7 +95,8 @@ class _LoginState extends State<Login> {
                             decoration: const InputDecoration(
                                 border: UnderlineInputBorder(),
                                 hintText: 'Password'),
-                            onChanged: (password) => appState.password = password,
+                            onChanged: (password) =>
+                                appState.password = password,
                             controller: passwordTextController),
                       ),
                     ],
@@ -113,11 +116,13 @@ class _LoginState extends State<Login> {
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(4.0),
                           ),
-                          side: BorderSide(
-                              color: Theme.of(context).primaryColor),
+                          side:
+                              BorderSide(color: Theme.of(context).primaryColor),
                         ),
                         onPressed: () {
-                          appState.currentAction = PageAction(state: PageState.addPage, page: CreateAccountPageConfig);
+                          appState.currentAction = PageAction(
+                              state: PageState.addPage,
+                              page: CreateAccountPageConfig);
                         },
                         child: const Text(
                           'Create Account',
@@ -140,7 +145,10 @@ class _LoginState extends State<Login> {
                         onPressed: () {
                           appState.login();
                         },
-                        child: const Text('Login', style: TextStyle(color: Colors.black),),
+                        child: const Text(
+                          'Login',
+                          style: TextStyle(color: Colors.black),
+                        ),
                       ),
                     ),
                     const SizedBox(

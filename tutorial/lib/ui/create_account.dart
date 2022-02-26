@@ -33,6 +33,8 @@ import 'package:provider/provider.dart';
 import '../app_state.dart';
 
 class CreateAccount extends StatefulWidget {
+  const CreateAccount({Key key}) : super(key: key);
+
   @override
   _CreateAccountState createState() => _CreateAccountState();
 }
@@ -91,7 +93,8 @@ class _CreateAccountState extends State<CreateAccount> {
                             decoration: const InputDecoration(
                                 border: UnderlineInputBorder(),
                                 hintText: 'Password'),
-                            onChanged: (password) => appState.password = password,
+                            onChanged: (password) =>
+                                appState.password = password,
                             controller: passwordTextController),
                       ),
                     ],
@@ -134,9 +137,13 @@ class _CreateAccountState extends State<CreateAccount> {
                           side: const BorderSide(color: Colors.black),
                         ),
                         onPressed: () {
-                          appState.currentAction = PageAction(state: PageState.pop);
+                          appState.currentAction =
+                              PageAction(state: PageState.pop);
                         },
-                        child: const Text('Cancel', style: TextStyle(color: Colors.black),),
+                        child: const Text(
+                          'Cancel',
+                          style: TextStyle(color: Colors.black),
+                        ),
                       ),
                     ),
                     const SizedBox(
@@ -151,5 +158,4 @@ class _CreateAccountState extends State<CreateAccount> {
       ),
     );
   }
-
 }

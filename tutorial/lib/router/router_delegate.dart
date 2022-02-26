@@ -1,8 +1,9 @@
+// ignore: unnecessary_import
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-import './ui_pages.dart';
+import 'ui_pages.dart';
 import '../app_state.dart';
 import '../ui/ui.dart';
 
@@ -126,25 +127,25 @@ class ShoppingRouterDelegate extends RouterDelegate<PageConfiguration>
       switch (pageConfig.uiPage) {
         case Pages.Splash:
           // 3
-          _addPageData(Splash(), SplashPageConfig);
+          _addPageData(const Splash(), SplashPageConfig);
           break;
         case Pages.Login:
-          _addPageData(Login(), LoginPageConfig);
+          _addPageData(const Login(), LoginPageConfig);
           break;
         case Pages.CreateAccount:
-          _addPageData(CreateAccount(), CreateAccountPageConfig);
+          _addPageData(const CreateAccount(), CreateAccountPageConfig);
           break;
         case Pages.List:
-          _addPageData(ListItems(), ListItemsPageConfig);
+          _addPageData(const ListItems(), ListItemsPageConfig);
           break;
         case Pages.Cart:
-          _addPageData(Cart(), CartPageConfig);
+          _addPageData(const Cart(), CartPageConfig);
           break;
         case Pages.Checkout:
-          _addPageData(Checkout(), CheckoutPageConfig);
+          _addPageData(const Checkout(), CheckoutPageConfig);
           break;
         case Pages.Settings:
-          _addPageData(Settings(), SettingsPageConfig);
+          _addPageData(const Settings(), SettingsPageConfig);
           break;
         case Pages.Details:
           if (pageConfig.currentPageAction != null) {
@@ -323,8 +324,8 @@ class ShoppingRouterDelegate extends RouterDelegate<PageConfiguration>
           // In this case and other cases, push the pages necessary to navigate to the
           // destination using setPath.
           setPath([
-            _createPage(Login(), LoginPageConfig),
-            _createPage(CreateAccount(), CreateAccountPageConfig)
+            _createPage(const Login(), LoginPageConfig),
+            _createPage(const CreateAccount(), CreateAccountPageConfig)
           ]);
           break;
         case 'listItems':
@@ -332,20 +333,20 @@ class ShoppingRouterDelegate extends RouterDelegate<PageConfiguration>
           break;
         case 'cart':
           setPath([
-            _createPage(ListItems(), ListItemsPageConfig),
-            _createPage(Cart(), CartPageConfig)
+            _createPage(const ListItems(), ListItemsPageConfig),
+            _createPage(const Cart(), CartPageConfig)
           ]);
           break;
         case 'checkout':
           setPath([
-            _createPage(ListItems(), ListItemsPageConfig),
-            _createPage(Checkout(), CheckoutPageConfig)
+            _createPage(const ListItems(), ListItemsPageConfig),
+            _createPage(const Checkout(), CheckoutPageConfig)
           ]);
           break;
         case 'settings':
           setPath([
-            _createPage(ListItems(), ListItemsPageConfig),
-            _createPage(Settings(), SettingsPageConfig)
+            _createPage(const ListItems(), ListItemsPageConfig),
+            _createPage(const Settings(), SettingsPageConfig)
           ]);
           break;
       }

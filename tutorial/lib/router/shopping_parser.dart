@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import './ui_pages.dart';
+import 'ui_pages.dart';
 
 // A RouteInformationParser is a delegate used by Router
 // to parse a route’s information into a configuration of any type T
