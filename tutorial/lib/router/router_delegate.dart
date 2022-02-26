@@ -7,29 +7,23 @@ import 'ui_pages.dart';
 import '../app_state.dart';
 import '../ui/ui.dart';
 
-// 1
 class ShoppingRouterDelegate extends RouterDelegate<PageConfiguration>
-    // 2
     // uses the ChangeNotifier mixin, which helps notify any listeners of this delegate to update themselves whenever notifyListeners() is invoked.
     // This class also uses PopNavigatorRouterDelegateMixin, which lets you remove pages. It’ll also be useful later when you implement BackButtonDispatcher.
     with
         ChangeNotifier,
         PopNavigatorRouterDelegateMixin<PageConfiguration> {
-  // 3
   // list of Pages is the core of the app’s navigation,
-  //  and it denotes the current list of pages in the navigation stack.
+  // and it denotes the current list of pages in the navigation stack.
   // It’s private so that it can’t be modified directly, as that could lead to errors and unwanted states.
   final List<Page> _pages = [];
 
-  // 4
   // PopNavigatorRouterDelegateMixin requires a navigatorKey used for retrieving the current navigator of the Router
   @override
   final GlobalKey<NavigatorState> navigatorKey;
 
-  // 5
   final AppState appState;
 
-  // 6
   // takes in the current app state and creates a global navigator key. It’s important that you only create this key once.
   ShoppingRouterDelegate(this.appState) : navigatorKey = GlobalKey() {
     appState.addListener(() {
@@ -37,20 +31,18 @@ class ShoppingRouterDelegate extends RouterDelegate<PageConfiguration>
     });
   }
 
-  // 7
-  /// Getter for a list that cannot be changed
+  // Getter for a list that cannot be changed
   List<MaterialPage> get pages => List.unmodifiable(_pages);
 
-  /// Number of pages function
+  // Number of pages function
   int numPages() => _pages.length;
 
-  // 8
   @override
   PageConfiguration get currentConfiguration =>
       _pages.last.arguments as PageConfiguration;
 
   // gets called by RouterDelegate to obtain the widget tree that represents
-  //// the current state. In this scenario, the current state is the navigation history of the app
+  // the current state. In this scenario, the current state is the navigation history of the app
   @override
   Widget build(BuildContext context) {
     return Navigator(
@@ -60,14 +52,13 @@ class ShoppingRouterDelegate extends RouterDelegate<PageConfiguration>
     );
   }
 
-// The result argument is the value with which the route completed. An example of this is the value returned from a dialog when it’s popped.
+  // The result argument is the value with which the route completed. An example of this is the value returned from a dialog when it’s popped.
   bool _onPopPage(Route<dynamic> route, result) {
-    // 1
     final didPop = route.didPop(result);
     if (!didPop) {
       return false;
     }
-    // 2
+
     if (canPop()) {
       pop();
       return true;
@@ -109,7 +100,7 @@ class ShoppingRouterDelegate extends RouterDelegate<PageConfiguration>
         arguments: pageConfig);
   }
 
-// method to add this page to the navigation stack, i.e. to the _pages list
+  // method to add this page to the navigation stack, i.e. to the _pages list
   void _addPageData(Widget child, PageConfiguration pageConfig) {
     _pages.add(
       _createPage(child, pageConfig),
@@ -117,16 +108,13 @@ class ShoppingRouterDelegate extends RouterDelegate<PageConfiguration>
   }
 
   void addPage(PageConfiguration pageConfig) {
-    // 1
     final shouldAddPage = _pages.isEmpty ||
         (_pages.last.arguments as PageConfiguration).uiPage !=
             pageConfig.uiPage;
 
     if (shouldAddPage) {
-      // 2
       switch (pageConfig.uiPage) {
         case Pages.Splash:
-          // 3
           _addPageData(const Splash(), SplashPageConfig);
           break;
         case Pages.Login:
