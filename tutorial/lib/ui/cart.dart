@@ -5,7 +5,7 @@ import '../app_state.dart';
 import '../router/ui_pages.dart';
 
 class Cart extends StatelessWidget {
-  const Cart({Key key}) : super(key: key);
+  const Cart({required Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

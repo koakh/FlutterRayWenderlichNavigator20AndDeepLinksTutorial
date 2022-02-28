@@ -43,3 +43,14 @@ change
 // distributionUrl=https\://services.gradle.org/distributions/gradle-5.6.2-all.zip
 distributionUrl=https\://services.gradle.org/distributions/gradle-6.1.1-all.zip
 ```
+
+## Test DeepLinks
+
+```shell
+# settings
+$ adb shell 'am start -W -a android.intent.action.VIEW -c android.intent.category.BROWSABLE -d "navapp://deeplinks/settings"'
+# details/1
+$ adb shell 'am start -W -a android.intent.action.VIEW -c android.intent.category.BROWSABLE -d "navapp://deeplinks/details/1"'
+# cart
+$ adb shell 'am start -W -a android.intent.action.VIEW -c android.intent.category.BROWSABLE -d "navapp://deeplinks/cart"'
+```

@@ -7,7 +7,7 @@ import '../app_state.dart';
 import '../router/ui_pages.dart';
 
 class Login extends StatefulWidget {
-  const Login({Key key}) : super(key: key);
+  const Login({required Key key}) : super(key: key);
 
   @override
   _LoginState createState() => _LoginState();
@@ -21,8 +21,8 @@ class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
     final appState = Provider.of<AppState>(context, listen: false);
-    passwordTextController.text = appState.password;
-    emailTextController.text = appState.emailAddress;
+    passwordTextController.text = appState.password ?? '';
+    emailTextController.text = appState.emailAddress ?? '';
     return Scaffold(
       appBar: AppBar(
         elevation: 0,

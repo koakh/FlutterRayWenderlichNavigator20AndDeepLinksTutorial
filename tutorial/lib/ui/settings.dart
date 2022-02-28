@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import '../app_state.dart';
 
 class Settings extends StatelessWidget {
-  const Settings({Key key}) : super(key: key);
+  const Settings({required Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

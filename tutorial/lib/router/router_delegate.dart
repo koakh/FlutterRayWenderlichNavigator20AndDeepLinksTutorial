@@ -16,7 +16,7 @@ class ShoppingRouterDelegate extends RouterDelegate<PageConfiguration>
   // list of Pages is the core of the app’s navigation,
   // and it denotes the current list of pages in the navigation stack.
   // It’s private so that it can’t be modified directly, as that could lead to errors and unwanted states.
-  final List<Page> _pages = [];
+  final List<MaterialPage> _pages = [];
 
   // PopNavigatorRouterDelegateMixin requires a navigatorKey used for retrieving the current navigator of the Router
   @override
@@ -68,9 +68,7 @@ class ShoppingRouterDelegate extends RouterDelegate<PageConfiguration>
   }
 
   void _removePage(MaterialPage page) {
-    if (page != null) {
-      _pages.remove(page);
-    }
+    _pages.remove(page);
   }
 
   void pop() {
@@ -95,7 +93,7 @@ class ShoppingRouterDelegate extends RouterDelegate<PageConfiguration>
   MaterialPage _createPage(Widget child, PageConfiguration pageConfig) {
     return MaterialPage(
         child: child,
-        key: Key(pageConfig.key),
+        key: ValueKey(pageConfig.key),
         name: pageConfig.path,
         arguments: pageConfig);
   }
@@ -115,29 +113,31 @@ class ShoppingRouterDelegate extends RouterDelegate<PageConfiguration>
     if (shouldAddPage) {
       switch (pageConfig.uiPage) {
         case Pages.Splash:
-          _addPageData(const Splash(), SplashPageConfig);
+          _addPageData(Splash(key: UniqueKey()), SplashPageConfig);
           break;
         case Pages.Login:
-          _addPageData(const Login(), LoginPageConfig);
+          _addPageData(Login(key: UniqueKey()), LoginPageConfig);
           break;
         case Pages.CreateAccount:
-          _addPageData(const CreateAccount(), CreateAccountPageConfig);
+          _addPageData(
+              CreateAccount(key: UniqueKey()), CreateAccountPageConfig);
           break;
         case Pages.List:
-          _addPageData(const ListItems(), ListItemsPageConfig);
+          _addPageData(ListItems(key: UniqueKey()), ListItemsPageConfig);
           break;
         case Pages.Cart:
-          _addPageData(const Cart(), CartPageConfig);
+          _addPageData(Cart(key: UniqueKey()), CartPageConfig);
           break;
         case Pages.Checkout:
-          _addPageData(const Checkout(), CheckoutPageConfig);
+          _addPageData(Checkout(key: UniqueKey()), CheckoutPageConfig);
           break;
         case Pages.Settings:
-          _addPageData(const Settings(), SettingsPageConfig);
+          _addPageData(Settings(key: UniqueKey()), SettingsPageConfig);
           break;
         case Pages.Details:
-          if (pageConfig.currentPageAction != null) {
-            _addPageData(pageConfig.currentPageAction.widget, pageConfig);
+          if (pageConfig.currentPageAction != null &&
+              pageConfig.currentPageAction!.widget != null) {
+            _addPageData(pageConfig.currentPageAction!.widget!, pageConfig);
           }
           break;
         default:
@@ -204,7 +204,8 @@ class ShoppingRouterDelegate extends RouterDelegate<PageConfiguration>
   // When an page action is requested, you want to record the action associated
   // with the page. The _setPageAction method will do that.
   void _setPageAction(PageAction action) {
-    switch (action.page.uiPage) {
+    final page = action.page ?? SplashPageConfig;
+    switch (page.uiPage) {
       case Pages.Splash:
         SplashPageConfig.currentPageAction = action;
         break;
@@ -247,7 +248,7 @@ class ShoppingRouterDelegate extends RouterDelegate<PageConfiguration>
         case PageState.addPage:
           // Add a new page, given by the action’s page variable.
           _setPageAction(appState.currentAction);
-          addPage(appState.currentAction.page);
+          addPage(appState.currentAction.page!);
           break;
         case PageState.pop:
           // Pop the top-most page.
@@ -256,22 +257,22 @@ class ShoppingRouterDelegate extends RouterDelegate<PageConfiguration>
         case PageState.replace:
           // Replace the current page.
           _setPageAction(appState.currentAction);
-          replace(appState.currentAction.page);
+          replace(appState.currentAction.page!);
           break;
         case PageState.replaceAll:
           // Replace all of the pages with this page.
           _setPageAction(appState.currentAction);
-          replaceAll(appState.currentAction.page);
+          replaceAll(appState.currentAction.page!);
           break;
         case PageState.addWidget:
           // Push a widget onto the stack (Details page)
           _setPageAction(appState.currentAction);
           pushWidget(
-              appState.currentAction.widget, appState.currentAction.page);
+              appState.currentAction.widget!, appState.currentAction.page!);
           break;
         case PageState.addAll:
           // Add a list of pages.
-          addAll(appState.currentAction.pages);
+          addAll(appState.currentAction.pages!);
           break;
       }
     }
@@ -312,8 +313,9 @@ class ShoppingRouterDelegate extends RouterDelegate<PageConfiguration>
           // In this case and other cases, push the pages necessary to navigate to the
           // destination using setPath.
           setPath([
-            _createPage(const Login(), LoginPageConfig),
-            _createPage(const CreateAccount(), CreateAccountPageConfig)
+            _createPage(Login(key: UniqueKey()), LoginPageConfig),
+            _createPage(
+                CreateAccount(key: UniqueKey()), CreateAccountPageConfig)
           ]);
           break;
         case 'listItems':
@@ -321,20 +323,20 @@ class ShoppingRouterDelegate extends RouterDelegate<PageConfiguration>
           break;
         case 'cart':
           setPath([
-            _createPage(const ListItems(), ListItemsPageConfig),
-            _createPage(const Cart(), CartPageConfig)
+            _createPage(ListItems(key: UniqueKey()), ListItemsPageConfig),
+            _createPage(Cart(key: UniqueKey()), CartPageConfig)
           ]);
           break;
         case 'checkout':
           setPath([
-            _createPage(const ListItems(), ListItemsPageConfig),
-            _createPage(const Checkout(), CheckoutPageConfig)
+            _createPage(ListItems(key: UniqueKey()), ListItemsPageConfig),
+            _createPage(Checkout(key: UniqueKey()), CheckoutPageConfig)
           ]);
           break;
         case 'settings':
           setPath([
-            _createPage(const ListItems(), ListItemsPageConfig),
-            _createPage(const Settings(), SettingsPageConfig)
+            _createPage(ListItems(key: UniqueKey()), ListItemsPageConfig),
+            _createPage(Settings(key: UniqueKey()), SettingsPageConfig)
           ]);
           break;
       }

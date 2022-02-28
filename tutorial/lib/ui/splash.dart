@@ -8,7 +8,7 @@ import '../app_state.dart';
 const String LoggedInKey = 'LoggedIn';
 
 class Splash extends StatefulWidget {
-  const Splash({Key key}) : super(key: key);
+  const Splash({required Key key}) : super(key: key);
 
   @override
   _SplashState createState() => _SplashState();
@@ -16,7 +16,7 @@ class Splash extends StatefulWidget {
 
 class _SplashState extends State<Splash> {
   bool _initialized = false;
-  AppState appState;
+  late AppState appState;
 
   @override
   Widget build(BuildContext context) {

@@ -16,9 +16,9 @@ class PageAction {
   PageState state;
   // The page, pages and widget are all optional fields
   // and each are used differently depending on the page state
-  PageConfiguration page;
-  List<PageConfiguration> pages;
-  Widget widget;
+  PageConfiguration? page;
+  List<PageConfiguration>? pages;
+  Widget? widget;
 
   PageAction(
       {this.state = PageState.none,
@@ -37,9 +37,9 @@ class AppState extends ChangeNotifier {
 
   final cartItems = [];
 
-  String emailAddress;
+  String? emailAddress;
 
-  String password;
+  String? password;
 
   PageAction _currentAction = PageAction();
   PageAction get currentAction => _currentAction;
@@ -113,9 +113,6 @@ class AppState extends ChangeNotifier {
 
   void getLoggedInState() async {
     final prefs = await SharedPreferences.getInstance();
-    _loggedIn = prefs.getBool(LoggedInKey);
-    if (_loggedIn == null) {
-      _loggedIn = false;
-    }
+    _loggedIn = prefs.getBool(LoggedInKey)!;
   }
 }

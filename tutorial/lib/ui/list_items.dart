@@ -6,7 +6,7 @@ import '../app_state.dart';
 import '../router/ui_pages.dart';
 
 class ListItems extends StatelessWidget {
-  const ListItems({Key key}) : super(key: key);
+  const ListItems({required Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

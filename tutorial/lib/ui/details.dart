@@ -6,6 +6,7 @@ import '../router/ui_pages.dart';
 class Details extends StatelessWidget {
   final int id;
 
+  // ignore: use_key_in_widget_constructors
   const Details(this.id);
 
   @override

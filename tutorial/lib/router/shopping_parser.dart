@@ -20,7 +20,7 @@ class ShoppingParser extends RouteInformationParser<PageConfiguration> {
     // with slashes between — for example: `/`, `/path` or `/path/to/the/app`.
     // It’s equivalent to the URL in a web application. Use parse from Uri to
     // create a Uri from this String.
-    final uri = Uri.parse(routeInformation.location);
+    final uri = Uri.parse(routeInformation.location!);
     // If there are no paths, which is most likely the case when the user is
     // launching the app, return SplashPage.
     if (uri.pathSegments.isEmpty) {

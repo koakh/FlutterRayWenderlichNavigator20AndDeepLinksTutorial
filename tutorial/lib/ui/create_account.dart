@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import '../app_state.dart';
 
 class CreateAccount extends StatefulWidget {
-  const CreateAccount({Key key}) : super(key: key);
+  const CreateAccount({required Key key}) : super(key: key);
 
   @override
   _CreateAccountState createState() => _CreateAccountState();
@@ -18,8 +18,8 @@ class _CreateAccountState extends State<CreateAccount> {
   @override
   Widget build(BuildContext context) {
     final appState = Provider.of<AppState>(context, listen: false);
-    passwordTextController.text = appState.password;
-    emailTextController.text = appState.emailAddress;
+    passwordTextController.text = appState.password ?? '';
+    emailTextController.text = appState.emailAddress ?? '';
     return Scaffold(
       appBar: AppBar(
         elevation: 0,

@@ -9,11 +9,13 @@ import 'app_state.dart';
 import 'router/router.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(MyApp(
+    key: UniqueKey(),
+  ));
 }
 
 class MyApp extends StatefulWidget {
-  const MyApp({Key key}) : super(key: key);
+  const MyApp({required Key key}) : super(key: key);
 
   @override
   _MyAppState createState() => _MyAppState();
@@ -23,12 +25,12 @@ class _MyAppState extends State<MyApp> {
   final appState = AppState();
   // Define instances of ShoppingRouterDelegate and ShoppingParser
   // to use in MaterialApp.router, they are required for Navigator 2.0
-  ShoppingRouterDelegate delegate;
+  late ShoppingRouterDelegate delegate;
   final parser = ShoppingParser();
   // declare back button dispatcher
-  ShoppingBackButtonDispatcher backButtonDispatcher;
+  // late ShoppingBackButtonDispatcher backButtonDispatcher;
   // deeplinks _linkSubscription is a StreamSubscription for listening to incoming links. Call .cancel() on it to dispose of the stream.
-  StreamSubscription _linkSubscription;
+  late StreamSubscription _linkSubscription;
 
   _MyAppState() {
     // Create the delegate with the appState field
@@ -36,33 +38,34 @@ class _MyAppState extends State<MyApp> {
     // Set up the initial route of this app to be the Splash page using setNewRoutePath.
     delegate.setNewRoutePath(SplashPageConfig);
     // initialize backButtonDispatcher
-    backButtonDispatcher = ShoppingBackButtonDispatcher(delegate);
+    // backButtonDispatcher = ShoppingBackButtonDispatcher(delegate);
   }
 
   @override
   void initState() {
     super.initState();
+    // deepLinks
     initPlatformState();
   }
 
   @override
   void dispose() {
     // dispose linkSubscription
-    if (_linkSubscription != null) {
-      _linkSubscription.cancel();
-    }
+    _linkSubscription.cancel();
     super.dispose();
   }
 
-  // Platform messages are asynchronous, so we initialize in an async method.
+  // deepLinks : Platform messages are asynchronous, so we initialize in an async method.
   Future<void> initPlatformState() async {
     // Attach a listener to the Uri links stream
     // Initialize StreamSubscription by listening for any deep link events.
-    _linkSubscription = getUriLinksStream().listen((Uri uri) {
+    _linkSubscription = uriLinkStream.listen((Uri? uri) {
       if (!mounted) return;
       setState(() {
         // Have the app's delegate parse the uri and then navigate using the previously defined parseRoute.
-        delegate.parseRoute(uri);
+        if (uri != null) {
+          delegate.parseRoute(uri);
+        }
       });
     }, onError: (Object err) {
       print('Got error $err');
@@ -86,7 +89,8 @@ class _MyAppState extends State<MyApp> {
         ),
         routerDelegate: delegate,
         routeInformationParser: parser,
-        backButtonDispatcher: backButtonDispatcher,
+        // backButtonDispatcher: backButtonDispatcher,
+        backButtonDispatcher: RootBackButtonDispatcher(),
       ),
     );
   }

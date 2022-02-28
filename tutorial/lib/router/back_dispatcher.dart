@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'router_delegate.dart';
 
+// currently doesn't work, have some back problems,
+// leave for default RootBackButtonDispatcher implementation that works
+
 // Note that this class doesn't do any complex back button handling here.
 // Rather, it's just an example of subClassing RootBackButtonDispatcher
 // to create a custom Back Button Dispatcher. If you need to do some custom
