@@ -7,6 +7,7 @@ FILE_EXCLUDE=exclude.tag
 mkdir $DIR -p
 
 touch .bak/$FILE_EXCLUDE
+touch tutorial/build/$FILE_EXCLUDE
 
 tar -zcvf $FILE \
   --exclude-tag-all=$FILE_EXCLUDE \

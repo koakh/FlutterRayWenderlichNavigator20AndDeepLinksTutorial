@@ -28,7 +28,7 @@ class _MyAppState extends State<MyApp> {
   late ShoppingRouterDelegate delegate;
   final parser = ShoppingParser();
   // declare back button dispatcher
-  // late ShoppingBackButtonDispatcher backButtonDispatcher;
+  late ShoppingBackButtonDispatcher backButtonDispatcher;
   // deeplinks _linkSubscription is a StreamSubscription for listening to incoming links. Call .cancel() on it to dispose of the stream.
   late StreamSubscription _linkSubscription;
 
@@ -38,7 +38,7 @@ class _MyAppState extends State<MyApp> {
     // Set up the initial route of this app to be the Splash page using setNewRoutePath.
     delegate.setNewRoutePath(SplashPageConfig);
     // initialize backButtonDispatcher
-    // backButtonDispatcher = ShoppingBackButtonDispatcher(delegate);
+    backButtonDispatcher = ShoppingBackButtonDispatcher(delegate);
   }
 
   @override
@@ -89,8 +89,8 @@ class _MyAppState extends State<MyApp> {
         ),
         routerDelegate: delegate,
         routeInformationParser: parser,
-        // backButtonDispatcher: backButtonDispatcher,
-        backButtonDispatcher: RootBackButtonDispatcher(),
+        backButtonDispatcher: backButtonDispatcher,
+        // backButtonDispatcher: RootBackButtonDispatcher(),
       ),
     );
   }

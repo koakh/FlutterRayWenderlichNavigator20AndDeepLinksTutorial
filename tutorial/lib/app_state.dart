@@ -5,7 +5,7 @@ import 'router/ui_pages.dart';
 
 const String LoggedInKey = 'LoggedIn';
 
-//  defines what types of page states the app can be in.
+// defines what types of page states the app can be in.
 // If the app is in the none state, nothing needs to be done.
 // If it is in the addPage state, then a page needs to be added.
 // To pop a page, set the page state to pop.

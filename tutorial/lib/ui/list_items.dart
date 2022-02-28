@@ -39,10 +39,12 @@ class ListItems extends StatelessWidget {
           itemCount: items.length,
           itemBuilder: (context, index) {
             return ListTile(
+              // current item #idx
               title: Text('${items[index]}'),
               onTap: () {
                 appState.currentAction = PageAction(
                     state: PageState.addWidget,
+                    // pass widget details
                     widget: Details(index),
                     page: DetailsPageConfig);
               },

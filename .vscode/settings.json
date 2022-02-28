@@ -1,4 +1,5 @@
 {
+  "dart.openDevTools": "never",
   "cSpell.words": [
     "appauth",
     "deeplinks",
